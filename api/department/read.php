@@ -4,8 +4,7 @@
 
 // Include the database and object fiels
 include_once '../config/database.php';
-include_once '../objects/manager.php';
-include_once './debug.php';
+include_once '../objects/department.php';
 
 
 
@@ -16,10 +15,10 @@ $db = $database->getConnection();
 
 // Create new manager object using the ds connection handle to establish
 // a connection with the database
-$manager = new Manager($db);
+$department = new Department($db);
 
 // Retrieve the select all manager statement by calling read() behavior
-$stmt = $manager->read();
+$stmt = $department->read();
 
 $num= $stmt->rowCount();
 
@@ -31,24 +30,24 @@ if ($num > 0) {
     // produced by stmt
 
     // Create a manager array to store all attributes of all managers in table
-    $manager_arr = array();
-    $manager_arr["manager"]=array();
+    $department_arr = array();
+    $department_arr["department"]=array();
     
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         extract($row); // take row from table within stmt so that its attributes
                     // can be stored in manager_item
-        $manager_item = array(
-            "manager_id" => $manager_id,
-            "name" => $name,
+        $department_item = array(
+            "dept_name" => $dept_name,
+            "budget" => $budget,
             "phone" => $phone,
-            "email" => $email
+            "building" => $building
         );
         // Add each manageritem to the manager array
-        array_push($manager_arr["manager"], $manager_item);
+        array_push($department_arr["department"], $department_item);
     }
 
     // Print the json encoded version of each row to the browser
-    echo json_encode($manager_arr["manager"]);
+    echo json_encode($department_arr["department"]);
 }
 // Otherwise, if no managers tuples in table, print the empty array
 else {
