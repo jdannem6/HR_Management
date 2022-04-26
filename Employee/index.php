@@ -8,23 +8,29 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
-                      <table id="managers" class="table table-bordered table-hover">
+                      <table id="employee" class="table table-bordered table-hover">
                         <thead>
                           <tr> 
-                            <th>Name</th>
+                              <th>ID</th>
+                              <th>Name</th>
+                              <th>Department name</th>
                               <th>Phone</th>
                               <th>Email</th>
-                              <th>Action</th>
+                              <th>Salary</th>
+                              <th>Start day</th>
                           </tr>
                         </thead>
                         <tbody>
                         </tbody>
                         <tfoot>
                           <tr>
-                            <th>Name</th>
-                              <th>Phone</th>
-                              <th>Email</th>
-                              <th>Action</th>
+                          <th>ID</th>
+                          <th>Name</th>
+                          <th>Department name</th>
+                          <th>Phone</th>
+                          <th>Email</th>
+                          <th>Salary</th>
+                          <th>Start day</th>
                           </tr>
                         </tfoot>
                       </table>
@@ -47,7 +53,7 @@
       // to get data from a database
       type: "GET",
       // url of file which specifies how to ge the data
-      url: "../api/manager/read.php",
+      url: "../api/employee/read.php",
       dataType: 'json',
       // upon success, this function creates tuples for each manager in the table 
       // and appends them to the response variable
@@ -55,16 +61,19 @@
         var response="";
         for(var user in data){
           response += 
-            "<tr>"+
-              "<td>"+data[user].name+"</td>"+
-              "<td>"+data[user].phone+"</td>"+
-              "<td>"+data[user].email+"</td>"+
-              "<td><a href='update.php?id="+data[user].id+"'>Edit</a> | <a href='#' onClick=Remove('"+data[user].id+"')>Remove</a></td>"+
-            "</tr>"
-            console.log(reponse);
+                "<tr>"+
+                "<td>"+data[user].emp_id+"</td>"+
+                "<td>"+data[user].name+"</td>"+
+                "<td>"+data[user].dept_name+"</td>"+
+                "<td>"+data[user].phone+"</td>"+
+                "<td>"+data[user].email+"</td>"+
+                "<td>"+data[user].salary+"</td>"+
+                "<td>"+data[user].start_date+"</td>"+
+                "<td><a href='update.php?id="+data[user].emp_id+"'>Edit</a> | <a href='#' onClick=Remove('"+data[user].emp_id+"')>Remove</a></td>"+
+                "</tr>";
         }
         // appends the response to the the table whose id=manager
-        $(response).appendTo($("#managers"));
+        $(response).appendTo($("#employee"));
       }
 
     });
@@ -73,13 +82,13 @@
   // This function takes a parameter named id and updates the database by 
   // removing the manager record with the corresponding id
   function Remove(id){
-    var result= confirm("Are you sure you want to delete the Manager Record?");
+    var result= confirm("Are you sure you want to delete this Employee Record?");
     if (result == true) {
       $.ajax({
         // Post request used to update server's database
         type: "POST",
         // delete.php specifies how to perform the delete operation
-        url: '../api/manager/delete.php',
+        url: '../api/employee/delete.php',
         dataType: 'json',
         data: {
           id: id
@@ -93,8 +102,8 @@
           // if manager record was successfully removed, send message to browser
           // indicating such
           if (result['status'] == true) {
-            alert("Successfully Removed Manager!");
-            window.location.href = '/HR/manager';
+            alert("Successfully Removed Employee!");
+            window.location.reload();
 
           }
           // Otherwise, if it could not be deleted, print the message contained within

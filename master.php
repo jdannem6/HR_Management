@@ -124,8 +124,8 @@
           </a>
           <!-- Employees drop-down menu -->
           <ul class="treeview-menu">
-            <li><a href="/HR/Manager/create.php">Add Employee</a></li>
-            <li><a href="/HR/Manager">View Employees</a></li>
+            <li><a href="/HR_Management/Employee/create.php">Add Employee</a></li>
+            <li><a href="/HR_Management/Employee">View Employees</a></li>
           </ul>
 
            <!-- Teams button -->
