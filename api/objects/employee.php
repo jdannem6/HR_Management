@@ -6,9 +6,9 @@ class Employee{
     private $table_name = "employee";
  
     // object properties
-    public $eampid;
+    public $id;
     public $name;
-    public $deparment;
+    public $department;
     public $phone;
     public $email;
     public $salary;
@@ -41,7 +41,7 @@ class Employee{
     
         // select all query
         $query = "SELECT
-                    `emp_id`, `name`, `dept_name`, `phone`,'email','salary','start_date'
+                    `emp_id`, `name`, `dept_name`, `phone`,`email`,`salary`,`start_date`
                 FROM
                     " . $this->table_name . " 
                 WHERE
@@ -86,7 +86,7 @@ class Employee{
         $query = "UPDATE
                     " . $this->table_name . "
                 SET
-                    emp_id='".$this->id."', name='".$this->name."', dept_name='".$this->deparment."', phone='".$this->phone."', email='".$this->email."', salary='".$this->salary."', start_date='".$this->start_date."'
+                    name='".$this->name."', dept_name='".$this->department."', phone='".$this->phone."', email='".$this->email."', salary='".$this->salary."', start_date='".$this->start_date."'
                 WHERE
                     emp_id='".$this->id."'";
     

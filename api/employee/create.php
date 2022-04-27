@@ -22,10 +22,11 @@ $db = $database->getConnection();
 
 if(isset($_POST["action"]))
 {
-    if(isset($_POST["action"]) == "getDept")
+    $database = new Database();
+    $db = $database->getConnection();
+    if($_POST["action"] == "getDept")
     {
-        $database = new Database();
-        $db = $database->getConnection();
+        
         $department = new Department($db);
         $stmt = $department->read();
         $num = $stmt->rowCount();
@@ -50,25 +51,22 @@ if(isset($_POST["action"]))
 
 
     }
-    else if(isset($_POST["action"]) == "create")
+    else if($_POST["action"] == "create")
     {
-        $database = new Database();
-        $db = $database->getConnection();
         $employee = new Employee($db);
-        $employee->id = $_POST['id'];
         $employee->name = $_POST['name'];
-        $employee->deparment = $_POST['department'];
+        $employee->department = $_POST['department'];
         $employee->phone = $_POST['phone'];
         $employee->email = $_POST['email'];
         $employee->salary = $_POST['salary'];
         $employee->start_date = $_POST['start_date'];
 
         // create the doctor
-        if($employee->add()){
+        if($employee->create()){
             $employee_arr=array(
                 "status" => true,
                 "message" => "Successfully added!",
-                "id" => $employee->id,
+            
                 "name" => $employee->name,
                 "department" => $employee->department,
                 "phone" => $employee->phone,
