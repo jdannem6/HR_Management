@@ -132,7 +132,6 @@ $content = '
 
 
     function UpdateEmployee(){
-        alert(id);
         $.ajax(
         {
             type: "POST",
