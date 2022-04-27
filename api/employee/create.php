@@ -59,7 +59,7 @@ if(isset($_POST["action"]))
         $employee->phone = $_POST['phone'];
         $employee->email = $_POST['email'];
         $employee->salary = $_POST['salary'];
-        $employee->start_date = $_POST['start_date'];
+        $employee->start_date = date('Y-m-d H:i:s');
 
         // create the doctor
         if($employee->create()){
